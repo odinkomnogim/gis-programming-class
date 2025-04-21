@@ -188,16 +188,16 @@ class Vyugov:
         # Only create GUI ONCE in callback, so that it will only load when the plugin is started
         if self.first_start == True:
             self.first_start = False
-            self.dlg = VyugovDialog()
+            self.dialog = VyugovDialog()
 
             # show the dialog
-            self.dlg.show()
+            self.dialog.show()
             # Run the dialog event loop
-            result = self.dlg.exec_()
+            result = self.dialog.exec_()
             # See if OK was pressed
             if result:
-                file_path = self.dlg.fileWidget.filePath()
-                quality = self.dlg.qualitySpinBox.value()
+                file_path = self.dialog.fileWidget.filePath()
+                quality = self.dialog.qualitySpinBox.value()
                 
                 # Текущая карта
                 iface = self.iface

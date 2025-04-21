@@ -10,7 +10,7 @@ version=0.1
 author=Vyugov Artyom
 email=-
 
-about=Provide a brief description of the plugin and its purpose.
+about=New window to export QGIS map to JPG files 
 
 tracker=http://bugs
 repository=http://repo
