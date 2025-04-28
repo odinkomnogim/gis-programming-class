@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/plugins/Kotunova" >
+        <file>icon.png</file>
+    </qresource>
+</RCC>
