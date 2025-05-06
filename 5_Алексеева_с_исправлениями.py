@@ -5,11 +5,8 @@ from qgis.core import (
     QgsGeometry
 )
 
-stations_layer = QgsVectorLayer('C:/Users/Виктория/Desktop/proga/gis-programming-class/stations.geojson', 'Станции', 'ogr')
-districts_layer = QgsVectorLayer('C:/Users/Виктория/Desktop/proga/gis-programming-class/districts.geojson', 'Районы', 'ogr')
-
-if not stations_layer.isValid() or not districts_layer.isValid():
-    raise Exception("Ошибка загрузки одного из слоёв")
+stations_layer = iface.addVectorLayer('C:/Users/Виктория/Downloads/stations (1).geojson', 'Станции', 'ogr')
+districts_layer = iface.addVectorLayer('C:/Users/Виктория/Downloads/districts (1).geojson', 'Районы', 'ogr')
 
 buffer_layer = QgsVectorLayer('Polygon?crs=EPSG:3857', 'Буферы_Алексеева', 'memory')
 provider = buffer_layer.dataProvider()
@@ -19,10 +16,10 @@ buffer_layer.updateFields()
 buffer_features = []
 for feature in stations_layer.getFeatures():
     attrs = feature.attributes()
-    if 'синяя' in str(attrs).lower():
+    if 'blue' in str(attrs).lower():
         depth = None
         for i, field in enumerate(stations_layer.fields()):
-            if 'глубин' in field.name().lower():
+            if 'depth' in field.name().lower():
                 depth = attrs[i]
                 break
         if depth is not None:
@@ -34,7 +31,7 @@ for feature in stations_layer.getFeatures():
                 new_feat.setAttributes(attrs)
                 buffer_features.append(new_feat)
             except ValueError:
-                print(f"Ошибка преобразования глубины в число: {depth}")
+                pass
 
 provider.addFeatures(buffer_features)
 buffer_layer.updateExtents()
